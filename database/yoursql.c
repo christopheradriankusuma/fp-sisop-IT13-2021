@@ -1497,7 +1497,7 @@ int main(int argc, char const *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    if (chdir(server_path) < 0) {
+    if (chdir("/home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/database") < 0) {
         exit(EXIT_FAILURE);
     }
 
