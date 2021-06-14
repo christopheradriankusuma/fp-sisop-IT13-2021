@@ -1,0 +1,2 @@
+@hourly sudo /home/kali/Desktop/Sisop/FP/client/dumper '*'
+@hourly zip /home/kali/Desktop/Sisop/FP/server/`date +"%T"`.zip /home/kali/Desktop/Sisop/FP/server/*.backup && rm /home/kali/Desktop/Sisop/FP/server/*.backup
