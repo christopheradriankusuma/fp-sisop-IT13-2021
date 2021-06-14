@@ -579,7 +579,7 @@ void db_use(char *buff, char *search) {
     if (found == 1) {
         sprintf(database, "%s", search);
     } else {
-        printf("You don't have access to %s\n", search);
+        sprintf(error, "You don't have access to %s", search);
     }
 }
 
