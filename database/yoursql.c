@@ -258,22 +258,6 @@ char* db_select(char *db, char *table, int argc, char *argv[], char *left, char 
 
     fread(buf, 1, fsize, fptr);
 
-    char *token;
-    token = strchr(buf, '\n');
-
-    int col = 0;
-    char line[1024];
-    sprintf(line, "%.*s", token - buf, buf);
-
-    char *tab;
-    tab = strtok(line, "\t");
-
-    while (tab != NULL) {
-        ++col;
-        tab = strtok(NULL, "\t");
-    }
-    parsed_col = col;
-
     int i = 0, pos = -1;
     column *cols;
     cols = parse_db(db, table);
@@ -282,35 +266,34 @@ char* db_select(char *db, char *table, int argc, char *argv[], char *left, char 
     buff = (char*)malloc(sizeof(char)*1024);
 
     memset(buff, 0, strlen(buff));
-    
 
     if (strlen(left) && strlen(right)) {
         if (argc == 1 && strcmp(argv[0], "*") == 0) {
-            sprintf(buff, "%s\n", copy_row(cols, 0, col));
+            sprintf(buff, "%s\n", copy_row(cols, 0, parsed_col));
             for (int k = 1; k < parsed_row; ++k) {
-                for (int c = 0; c < col; ++c) {
+                for (int c = 0; c < parsed_col; ++c) {
                     if (strcmp(cols[c].name, left) == 0 && strcmp(cols[c].contents[k], right) == 0) {
-                        sprintf(buff, "%s%s\n", buff, copy_row(cols, k, col));
+                        sprintf(buff, "%s%s\n", buff, copy_row(cols, k, parsed_col));
                     }
                 }
             }
         } else {
-            sprintf(buff, "%s\n", copy_partial_row(cols, argc, argv, 0, col));
+            sprintf(buff, "%s\n", copy_partial_row(cols, argc, argv, 0, parsed_col));
             for (int k = 1; k < parsed_row; ++k) {
-                for (int c = 0; c < col; ++c) {
+                for (int c = 0; c < parsed_col; ++c) {
                     if (strcmp(cols[c].name, left) == 0 && strcmp(cols[c].contents[k], right) == 0) {
-                        sprintf(buff, "%s%s\n", buff, copy_partial_row(cols, argc, argv, k, col));
+                        sprintf(buff, "%s%s\n", buff, copy_partial_row(cols, argc, argv, k, parsed_col));
                     }
                 }
             }
         }
     } else if (argc == 1 && strcmp(argv[0], "*") == 0) {
-        sprintf(buff, "%s\n", copy_row(cols, 0, col));
+        sprintf(buff, "%s\n", copy_row(cols, 0, parsed_col));
         sprintf(buff, "%s", buf);
     } else {    
-        sprintf(buff, "%s\n", copy_partial_row(cols, argc, argv, 0, col));
+        sprintf(buff, "%s\n", copy_partial_row(cols, argc, argv, 0, parsed_col));
         for (int k = 1; k < parsed_row; ++k) {
-            sprintf(buff, "%s%s\n", buff, copy_partial_row(cols, argc, argv, k, col));
+            sprintf(buff, "%s%s\n", buff, copy_partial_row(cols, argc, argv, k, parsed_col));
         }
     }
 
@@ -1321,7 +1304,7 @@ void cmd_parser(char *command) {
         int argc = 0;
         char *argv[10];
         for (int i = 0; i < 10; ++i) {
-            argv[i] = (char*)malloc(sizeof(char)*100);
+            argv[i] = (char*)malloc(sizeof(char)*1024);
         }
         char *token;
 
@@ -1340,8 +1323,8 @@ void cmd_parser(char *command) {
 
         sprintf(cmd, "%s", command);
         
-        char left[100];
-        char right[100];
+        char left[1024];
+        char right[1024];
         memset(left, 0, sizeof(left));
         memset(right, 0, sizeof(right));
 
