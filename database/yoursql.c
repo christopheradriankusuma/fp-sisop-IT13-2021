@@ -1236,7 +1236,7 @@ void cmd_parser(char *command) {
         }
 
         if (argc != parsed_col) {
-            printf("Wrong number of column! Expected %d but received %d\n", parsed_col, argc);
+            sprintf(error, "Wrong number of column! Expected %d but received %d", parsed_col, argc);
             return;
         }
 
