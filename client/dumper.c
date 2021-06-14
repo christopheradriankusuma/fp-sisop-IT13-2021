@@ -7,7 +7,7 @@
 #include <arpa/inet.h>
 #include <math.h>
 
-#define PORT 8080
+#define PORT 9000
 
 int main(int argc, char const *argv[]) {
     char username[1024];
