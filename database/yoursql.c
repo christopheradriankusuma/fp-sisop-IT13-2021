@@ -1077,7 +1077,7 @@ void cmd_parser(char *command) {
         }
 
         char cmd[1024];
-        sprintf(cmd, "%s\n", command + 16);
+        sprintf(cmd, "%s", command + 16);
 
         char *token;
         token = strtok(cmd, " ");
