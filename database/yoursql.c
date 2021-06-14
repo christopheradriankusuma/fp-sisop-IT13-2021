@@ -1547,7 +1547,6 @@ int main(int argc, char const *argv[]) {
         if (logged_in == 1) {
             while (1) {
                 read(new_socket, buffer, 1024);
-                printf("%s\n", buffer);
 
                 if (strcmp(buffer, "exit") == 0) {
                     break;
