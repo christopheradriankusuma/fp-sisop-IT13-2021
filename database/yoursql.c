@@ -15,7 +15,7 @@
 #include <wait.h>
 
 //mendefinisikan port server
-#define PORT 8080
+#define PORT 9000
 #define SO_REUSEPORT 15
 
 typedef struct column {
@@ -483,6 +483,8 @@ void db_drop_database(char *db) {
     fprintf(fptr, "%s\n", rewrite);
 
     fclose(fptr);
+
+    memset(database, 0, sizeof(database));
 }
 
 void db_drop_table(char *table) {
@@ -729,12 +731,26 @@ int check_syntax(char *command) {
         char *token;
         token = strtok(cmd, ", ;");
 
-        sprintf(cmd, "%.*s", len - 14 - strlen(token), command + 13 + strlen(token));
-        for (char *itr = cmd; *itr != '\0'; ++itr) {
-            if (*itr != ' ') {
-                sprintf(error, "Usage: CREATE TABLE [table];");
-                return 0;
-            }
+        char table[1024];
+        sprintf(table, "%s", token);
+
+        sprintf(cmd, "%s", command + 14 + strlen(token));
+        if (cmd[0] != '(') {
+            sprintf(error, "Usage: CREATE TABLE [table] ([value1 type1, ...]);");
+            return 0;
+        }
+
+        char tmp[1024];
+        token = strtok(cmd, " (,");
+        while (token != NULL) {
+            strtok(NULL, " ,(");
+            token = strtok(NULL, " (,;");
+            sprintf(tmp, "%s", token);
+        }
+
+        if (tmp[strlen(tmp) - 1] != ')') {
+            sprintf(error, "Usage: CREATE TABLE [table] ([value1 type1, ...]);");
+            return 0;
         }
     } 
     else if (strncmp(command, "DROP DATABASE", 13) == 0) {
@@ -1133,11 +1149,6 @@ void cmd_parser(char *command) {
         db_create_table(database, table, columns, j);
     } 
     else if (strncmp(command, "DROP DATABASE", 13) == 0) {
-        if (strlen(database) > 0) {
-            sprintf(error, "You must exit from database first!");
-            return;
-        }
-
         char cmd[1024];
         sprintf(cmd, "%s", command + 13);
 
