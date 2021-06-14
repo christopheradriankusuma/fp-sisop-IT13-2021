@@ -1378,7 +1378,6 @@ void dump(char *db) {
         if (strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") != 0) {
             char file[1024];
             sprintf(file, "%s/%s", db_to_dump, dp->d_name);
-            printf("%s\n", file);
 
             FILE *fptr;
             fptr = fopen(file, "r");
