@@ -29,7 +29,7 @@ char database[1024] = "";
 char username[1024] = "";
 char password[1024] = "";
 char buffer[1024] = "";
-char *server_path = "/home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021";
+char *server_path = "/home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/database/databases";
 char query_result[1024] = "";
 char error[1024] = "";
 
@@ -1438,11 +1438,11 @@ void dump(char *db) {
 
 
 int main(int argc, char const *argv[]) {
-    system("mkdir -p rootdb");
-    system("touch rootdb/users");
-    system("du rootdb/users | if [ `cut -f1` -eq 0 ]; then echo 'user|string\tpassword|string\nroot\troot' > rootdb/users; fi");
-    system("touch rootdb/db_permission");
-    system("du rootdb/db_permission | if [ `cut -f1` -eq 0 ]; then echo 'username|string\tdatabase|string\nroot\trootdb' > rootdb/db_permission; fi");
+    system("mkdir -p databases/rootdb");
+    system("touch databases/rootdb/users");
+    system("du databases/rootdb/users | if [ `cut -f1` -eq 0 ]; then echo 'user|string\tpassword|string\nroot\troot' > databases/rootdb/users; fi");
+    system("touch databases/rootdb/db_permission");
+    system("du databases/rootdb/db_permission | if [ `cut -f1` -eq 0 ]; then echo 'username|string\tdatabase|string\nroot\trootdb' > databases/rootdb/db_permission; fi");
 
     int server_fd, new_socket;
     struct sockaddr_in address;
@@ -1497,7 +1497,7 @@ int main(int argc, char const *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    if (chdir("/home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/database") < 0) {
+    if (chdir("/home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/database/databases") < 0) {
         exit(EXIT_FAILURE);
     }
 
