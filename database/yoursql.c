@@ -297,6 +297,8 @@ char* db_select(char *db, char *table, int argc, char *argv[], char *left, char 
         }
     }
 
+    *(buff + strlen(buff) - 1) = 0;
+
     fclose(fptr);
     return buff;
 }
