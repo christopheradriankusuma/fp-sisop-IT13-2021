@@ -250,7 +250,7 @@ char* db_select(char *db, char *table, int argc, char *argv[], char *left, char 
     FILE *fptr;
     fptr = fopen(file, "r");
 
-    char buf[4096];
+    char buf[1024] = "";
 
     fseek(fptr, 0, SEEK_END);
     long fsize = ftell(fptr);
@@ -288,7 +288,6 @@ char* db_select(char *db, char *table, int argc, char *argv[], char *left, char 
             }
         }
     } else if (argc == 1 && strcmp(argv[0], "*") == 0) {
-        sprintf(buff, "%s\n", copy_row(cols, 0, parsed_col));
         sprintf(buff, "%s", buf);
     } else {    
         sprintf(buff, "%s\n", copy_partial_row(cols, argc, argv, 0, parsed_col));
@@ -958,7 +957,6 @@ int check_syntax(char *command) {
     else if (strncmp(command, "SELECT", 6) == 0) {
         char cmd[1024];
         sprintf(cmd, "%s", command+7);
-        printf("cmd: %s\n", cmd);
 
         char *token;
         token = strtok(cmd, ", ");
@@ -1343,10 +1341,7 @@ void cmd_parser(char *command) {
             // printf("token: %s\n", token);
         }
         
-        char *res = db_select(database, table, argc, argv, left, right);
-        if (res != NULL) {
-            sprintf(query_result, "%s", res);
-        }
+        sprintf(query_result, "%s", db_select(database, table, argc, argv, left, right));
     } 
     else {
         sprintf(error, "Command not found!");
@@ -1497,9 +1492,9 @@ int main(int argc, char const *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    close(STDIN_FILENO);
-    close(STDOUT_FILENO);
-    close(STDERR_FILENO);
+    // close(STDIN_FILENO);
+    // close(STDOUT_FILENO);
+    // close(STDERR_FILENO);
 
     int logged_in = 0;
     while (1) {
