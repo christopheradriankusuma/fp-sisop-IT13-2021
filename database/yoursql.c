@@ -1428,7 +1428,7 @@ void dump(char *db) {
 }
 
 
-int main(int argc, char const *argv[]) {
+int main() {
     system("mkdir -p databases/rootdb");
     system("touch databases/rootdb/users");
     system("du databases/rootdb/users | if [ `cut -f1` -eq 0 ]; then echo 'user|string\tpassword|string\nroot\troot' > databases/rootdb/users; fi");
