@@ -516,7 +516,7 @@ void db_drop_column(char *table, char *col) {
 
     for (int c = 0; c < parsed_col; ++c) {
         if (strcmp(cols[c].name, col) != 0) {
-            sprintf(buf, "%s|%s\t", cols[c].name, cols[c].type);
+            sprintf(buf, "%s%s|%s\t", buf, cols[c].name, cols[c].type);
         }
     }
     buf[strlen(buf) - 1] = 0;
