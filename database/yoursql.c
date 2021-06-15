@@ -589,7 +589,7 @@ void create_database(char *db) {
     closedir(dir);
 
     char dir_to_make[1024];
-    sprintf(dir_to_make, "mkdir %s", db);
+    sprintf(dir_to_make, "mkdir %s -m 755", db);
     if (system(dir_to_make) != 0) {
         sprintf(error, "Database exists!");
         return;
@@ -1491,9 +1491,9 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    // close(STDIN_FILENO);
-    // close(STDOUT_FILENO);
-    // close(STDERR_FILENO);
+    close(STDIN_FILENO);
+    close(STDOUT_FILENO);
+    close(STDERR_FILENO);
 
     int logged_in = 0;
     while (1) {

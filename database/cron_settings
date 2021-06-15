@@ -1,2 +1,3 @@
-@hourly sudo /home/kali/Desktop/Sisop/FP/client/dumper '*'
-@hourly zip /home/kali/Desktop/Sisop/FP/server/`date +"%T"`.zip /home/kali/Desktop/Sisop/FP/server/*.backup && rm /home/kali/Desktop/Sisop/FP/server/*.backup
+0 * * * * echo 'kali' | sudo -S /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/client/dumper '*'
+0 * * * * zip /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/databases/databases/`date +"%s"`.zip /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/databases/database/*.backup /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/databases/database/db.log && rm /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/databases/database/*.backup 
+0 * * * * echo '' > /home/kali/Desktop/Sisop/FP/server/db.log
