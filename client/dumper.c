@@ -100,6 +100,8 @@ int main(int argc, char const *argv[]) {
         return 0;
     }
 
+    memset(buffer, 0, sizeof(buffer));
+
     sprintf(input, "dump-database %s", database);
     send(sock, input, strlen(input), 0);
     read(sock, buffer, 1024);
