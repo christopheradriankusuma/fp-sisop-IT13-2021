@@ -1,4 +1,1 @@
-0 * * * * echo 'kali' | sudo -S /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/client/dumper '*'
-0 * * * * zip /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/databases/databases/`date +"%s"`.zip /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/databases/database/*.backup /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/databases/database/db.log
-0 * * * * rm /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/databases/database/*.backup 
-0 * * * * echo '' > /home/kali/Desktop/Sisop/FP/server/db.log
+0 * * * * echo 'kali' | sudo -S /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/client/dumper '*' && zip /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/databases/databases/`date +"%s"`.zip /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/databases/database/*.backup /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/databases/database/db.log && rm /home/kali/Desktop/Sisop/FP/fp-sisop-IT13-2021/databases/database/*.backup && echo '' > /home/kali/Desktop/Sisop/FP/server/db.log
