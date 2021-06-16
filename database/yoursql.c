@@ -598,6 +598,7 @@ void create_database(char *db) {
     FILE *fptr;
     fptr = fopen("rootdb/db_permission", "a");
 
+    fprintf(fptr, "root\t%s\n", db);
     fprintf(fptr, "%s\t%s\n", username, db);
 
     fclose(fptr);
