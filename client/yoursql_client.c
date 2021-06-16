@@ -94,7 +94,7 @@ int main(int argc, char const *argv[]) {
     while (1) {
         memset(buffer, 0, sizeof(buffer));
 
-        printf("yoursql_client> ");
+        printf("yoursql> ");
         scanf("%[^\n]%*c", input);
 
         if (strcmp(input, "exit") == 0 || strcmp(input, "quit") == 0 || strcmp(input, "q") == 0) {
