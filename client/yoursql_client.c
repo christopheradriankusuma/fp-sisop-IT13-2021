@@ -33,12 +33,12 @@ int main(int argc, char const *argv[]) {
             }
         }
         if (fu == 0 || fp == 0) {
-            sprintf(error, "Usage: ./yoursql -u username -p password");
+            sprintf(error, "Usage: ./yoursql_client -u username -p password");
             printf("%s\n", error);
             exit(EXIT_FAILURE);
         }
     } else {
-        sprintf(error, "Usage: ./yoursql -u username -p password");
+        sprintf(error, "Usage: ./yoursql_client -u username -p password");
         printf("%s", error);
         exit(EXIT_FAILURE);
     }
@@ -94,7 +94,7 @@ int main(int argc, char const *argv[]) {
     while (1) {
         memset(buffer, 0, sizeof(buffer));
 
-        printf("yoursql> ");
+        printf("yoursql_client> ");
         scanf("%[^\n]%*c", input);
 
         if (strcmp(input, "exit") == 0 || strcmp(input, "quit") == 0 || strcmp(input, "q") == 0) {

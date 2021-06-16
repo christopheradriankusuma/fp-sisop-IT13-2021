@@ -42,12 +42,12 @@ int main(int argc, char const *argv[]) {
             }
         }
         if (fu == 0 || fp == 0) {
-            sprintf(error, "Usage: ./yoursql -u username -p password database");
+            sprintf(error, "Usage: ./dumper -u username -p password database");
             printf("%s\n", error);
             exit(EXIT_FAILURE);
         }
     } else {
-        sprintf(error, "Usage: ./yoursql -u username -p password database");
+        sprintf(error, "Usage: ./dumper -u username -p password database");
         printf("%s\n", error);
         exit(EXIT_FAILURE);
     }
